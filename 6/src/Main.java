@@ -7,7 +7,7 @@ class SimpleXorHash {
     private long block = 0L;
     private final int blockSize = Long.BYTES;
 
-    SimpleXorHash(int iterations){
+    SimpleXorHash(int iterations) {
         this.iterations = iterations;
     }
 
@@ -17,19 +17,20 @@ class SimpleXorHash {
     }
 
     long digest() {
-        for (int i = 0; i < iterations; ++i) {
-            int numberOfBlocksInInput = input.length / blockSize;
-            // add iteration if data structure have alignment
-            numberOfBlocksInInput += (input.length % blockSize > 0) ? 1 : 0;
+        int numberOfBlocksInInput = input.length / blockSize;
+        // add block if data structure have alignment
+        numberOfBlocksInInput += (input.length % blockSize > 0) ? 1 : 0;
 
-            for (int j = 0; j <= numberOfBlocksInInput; ++j) {
-                // collect blocks from 8 bytes
-                long nextBlock = 0L;
-                int startPosition = j * Byte.SIZE;
-                for (int k = 0; ((startPosition + k) < input.length) && k < blockSize; ++k) {
-                    nextBlock = (nextBlock << Byte.SIZE);
-                    nextBlock = nextBlock | input[startPosition + k];
-                }
+        for (int j = 0; j <= numberOfBlocksInInput; ++j) {
+            // collect blocks from 8 bytes
+            long nextBlock = 0L;
+            int startPosition = j * Byte.SIZE;
+            for (int k = 0; ((startPosition + k) < input.length) && k < blockSize; ++k) {
+                nextBlock = (nextBlock << Byte.SIZE);
+                nextBlock = nextBlock | input[startPosition + k];
+            }
+            // do iterations
+            for (int i = 0; i < iterations; ++i) {
                 step(nextBlock);
             }
         }
