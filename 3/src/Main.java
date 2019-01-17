@@ -28,7 +28,18 @@ public class Main {
 
     public static void main(String[] args) {
         long number = 0b10110111_00110011_01010101_10010100L;
-        System.out.println(Long.toBinaryString(number));
-        System.out.println(Long.toBinaryString(swapBytes(number, 1, 3)));
+        System.out.println(toBinaryString(number));
+        System.out.println(toBinaryString(swapBytes(number, 1, 3)));
+    }
+
+    static String toBinaryString(long number) {
+        StringBuilder sb = new StringBuilder();
+        for (int j = Long.SIZE - 1; j >= 0; --j) {
+            if ((j + 1) % 8 == 0 && j != 0 && (j + 1) != Long.SIZE) {
+                sb.append('_');
+            }
+            sb.append((number >> j) & 0b1);
+        }
+        return sb.toString();
     }
 }

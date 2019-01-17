@@ -19,8 +19,19 @@ public class Main {
 
     public static void main(String[] args) {
         int i = 0b10100000_11111111_11111111_10110011;
-        System.out.println(rotateLeft(i,11));
+        int shift = 11;
+        System.out.println(toBinaryString(i));
+        System.out.println(toBinaryString(rotateLeft(i, shift)));
     }
 
-
+    static String toBinaryString(int number) {
+        StringBuilder sb = new StringBuilder();
+        for (int j = Integer.SIZE - 1; j >= 0; --j) {
+            if ((j + 1) % 8 == 0 && j != 0 && (j + 1) != Integer.SIZE) {
+                sb.append('_');
+            }
+            sb.append((number >> j) & 0b1);
+        }
+        return sb.toString();
+    }
 }
