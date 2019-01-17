@@ -1,12 +1,9 @@
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Main {
     private static final int MASK32 = 0xffffffff;
@@ -34,10 +31,9 @@ public class Main {
         }
     }
 
-    public static int getRandomByte(Random generator) {
+    private static int getRandomByte(Random generator) {
         int min = Byte.MIN_VALUE;
         int max = Byte.MAX_VALUE;
-        int randomNum = generator.nextInt((max - min) + 1) + min;
-        return randomNum;
+        return generator.nextInt((max - min) + 1) + min;
     }
 }
