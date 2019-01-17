@@ -1,4 +1,12 @@
 public class Main {
+    /**
+     * Swap bytes in <code>number</code>. Bytes are numerated from 0:
+     * Long: [7][6][5][4][3][2][1][0]
+     * @param number input number
+     * @param i first byte position
+     * @param j second byte position
+     * @return
+     */
     static long swapBytes(long number, long i, long j) {
         // j gotta be hight bit: long{[][][j][][][i][][]}
         if (j < i) {
